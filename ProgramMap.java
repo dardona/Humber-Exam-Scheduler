@@ -1,37 +1,35 @@
-
-package humber.programs;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
 /*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package scheduletest;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
  *
- * Author: Danny Ardona
- *
+ * @author Danny Ardona
  */
 public class ProgramMap {
+    Map<String, Program> programs = new HashMap<String, Program>();
     
-    private Map<String, Program> programs;
-
-    public ProgramMap() {
-    
-    }
-    
-    public boolean addProgram(String programCode, Program program) {
+    public boolean addProgram(Program program){
+        programs.put(program.programCode, program);
         return true;
     }
     
-    public boolean removeProgram(String programCode) {
+    public boolean deleteProgram(Program program){
+        programs.remove(program.programCode);
         return true;
     }
     
-    public Iterator getPrograms() {
-        return new ArrayList<>().iterator();
+    public boolean checkIfProgramExists(String programCode){
+        if (programs.containsKey(programCode)){
+            programs.remove(programCode);
+            return true;
+        }
+        return false;
     }
-    
-    public Program getProgram(String programCode) {
-        return new Program("","");
-    }
-    
-    
 }
