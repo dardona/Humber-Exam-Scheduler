@@ -1,45 +1,40 @@
-
-package humber.programs;
-
-import humber.studentgroups.StudentGroup;
-import humber.studentgroups.StudentGroupMap;
-import java.util.ArrayList;
-import java.util.Iterator;
 /*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package scheduletest;
+
+/**
  *
- * Author: Danny Ardona
- *
+ * @author Danny Ardona
  */
 public class Program {
+    StudentGroupMap students;
+    String programCode;
+    String programName;
     
-    private String programCode;
-    private String programName;
-
-    public Program(String programCode, String programName) {
+    public Program(StudentGroupMap students, String programCode, String programName){
+        this.students = students;
         this.programCode = programCode;
         this.programName = programName;
     }
-
-    public String getProgramCode() {
+    
+    public boolean setProgramCode(String programCode){
+        this.programCode = programCode;
+        return true;
+    }
+    
+    public String getProgramCode(){
         return programCode;
     }
-
-    public void setProgramCode(String programCode) {
-        this.programCode = programCode;
+    
+    public boolean setProgramName(String programName){
+        this.programName = programName;
+        return true;
     }
-
-    public String getProgramName() {
+    
+    public String getProgramName(){
         return programName;
     }
-
-    public void setProgramName(String programName) {
-        this.programName = programName;
-    }
-    
-    public Iterator getStudentGroups() {
-        return new ArrayList<>().iterator();
-    }
-    
-    
-    
 }
