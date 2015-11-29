@@ -1,62 +1,57 @@
 
-package humber.exams;
+package scheduletest;
 
-import humber.courses.Course;
-import humber.rooms.Room;
 import org.joda.time.LocalTime;
-import java.util.Date;
-/*
- *
- * Author: Paras Prajapati
- *
- */
-public class Exam {
-    
-    private String examID;
-    private Date date;
-    private LocalTime startTime;
-    private LocalTime endTime;
-    
+
+class Exam
+{
+    Course course;
+    LocalTime date;
+    LocalTime startTime;
+    LocalTime endTime;
+    Room room;
+    int ID;
+    static int examIdentifier = 1923840;
+
     public Exam() {
-        
     }
-
-    public String getExamID() {
-        return examID;
-    }
-
-    public void setExamID(String examID) {
-        this.examID = examID;
-    }
-
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public String getDate() {
-        return date.toString();
-    }
-
-    public void setDate(Date date) {
+    
+    public Exam(Course course, LocalTime date, LocalTime starTime, LocalTime endTime, Room room)
+    {
+        ID = examIdentifier++;
+        this.course = course;
         this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.room = room;
     }
-
-    public String getStartTime() {
-        return startTime.toString();
+    public boolean setCourse(Course course)
+    {
+        this.course = course;
+        return true;
     }
-
-    public void setStartTime(int startHour, int startMin) {
-        this.startTime = new LocalTime(startHour, startMin);
+    public boolean setDate(LocalTime time)
+    {
+        this.date = time;
+        return true;
     }
-
-    public String getEndTime() {
-        return endTime.toString();
+    public boolean setStartTime(LocalTime time)
+    {
+        this.startTime = time;
+        return true;
     }
-
-    public void setEndTime(int endHour, int endMin) {
-        this.endTime = new LocalTime(endHour, endMin);
+    public boolean setEndTime(LocalTime time)
+    {
+        this.endTime = time;
+        return true;
     }
-    
-    
-    
+    public boolean setRoom(Room room)
+    {
+        this.room = room;
+        return true;
+    }
+    public String toString()
+    {
+        return ID+"";
+    }
 }
