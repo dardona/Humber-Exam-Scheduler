@@ -14,7 +14,7 @@ public class Program {
     String programCode;
     String programName;
     
-    public Program(StudentGroupMap students, String programCode, String programName){
+    public Program(String programCode, String programName){
         this.students = students;
         this.programCode = programCode;
         this.programName = programName;
