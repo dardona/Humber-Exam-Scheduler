@@ -5,6 +5,12 @@
  */
 package scheduletest;
 
+import com.database.config.DatabaseConnection;
+import com.database.config.Result;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+
 /**
  *
  * @author Danny Ardona
@@ -14,7 +20,11 @@ public class Program {
     String programCode;
     String programName;
     
-    public Program(StudentGroupMap students, String programCode, String programName){
+    public Program(){
+        
+    }
+    
+    public Program(String programCode, String programName){
         this.students = students;
         this.programCode = programCode;
         this.programName = programName;
@@ -37,4 +47,41 @@ public class Program {
     public String getProgramName(){
         return programName;
     }
+    
+    public void addProgram(){
+        DatabaseConnection connection = DatabaseConnection.open();
+        connection.addProgram(programCode, programName);
+    }
+    
+    public void removeProgram(){
+        DatabaseConnection connection = DatabaseConnection.open();
+        connection.removeProgram(programCode);
+    }
+    
+    public Program getProgramByCode(String programCode) throws SQLException{
+        DatabaseConnection connection = DatabaseConnection.open();
+        Result result = connection.getProgram(programCode); //change hasProgram to w/e they call it
+       
+        if (result.hasNext()){
+            ResultSet set = result.next();
+            //System.out.println(set.getString("program_code")  + ", " + set.getString("program_name"));
+        }
+        
+        return this;
+    }
+    
+    public HashMap<String, Program> getMap() throws SQLException{
+        HashMap<String, Program> programs = new HashMap<String, Program>();
+        DatabaseConnection connection = DatabaseConnection.open();
+        Result result = connection.getPrograms();
+        
+        while(result.hasNext()){
+            ResultSet set = result.next();
+            Program program = new Program(set.getString("program_code"), set.getString("program_name"));
+            //System.out.println(set.getString("program_code")  + ", " + set.getString("program_name"));
+            programs.put(program.getProgramCode(), program);
+        }
+        
+        return programs;
+    }   
 }
